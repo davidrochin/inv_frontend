@@ -1,0 +1,38 @@
+<h1 class="mat-h1">Nuevo artículo</h1>
+<form action="#" style="display: flex; flex-direction:column">
+
+  <div class="row">
+
+    <!-- ID -->
+    <mat-form-field class="col">
+      <input matInput placeholder="ID" value="{{ id }}" disabled>
+    </mat-form-field>
+
+    <!-- Nombre -->
+    <mat-form-field class="col">
+      <input name="name" [(ngModel)]='item.name' matInput placeholder="Nombre" value="{{ item.name }}">
+    </mat-form-field>
+
+    <!-- Descripcion -->
+    <mat-form-field class="col">
+      <input name="description" [(ngModel)]='item.description' matInput placeholder="Descripción" value="{{ item.description }}">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+
+    <!-- Categoria -->
+    <mat-form-field class="col">
+      <mat-label>Categoría</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Precio -->
+    <mat-form-field class="col">
+      <input matInput placeholder="Precio">
+    </mat-form-field>
+  </div>
+
+</form>
