@@ -40,12 +40,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
-    ItemListComponent
+    ItemListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

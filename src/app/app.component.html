@@ -4,11 +4,13 @@
   </button>
   <span style="padding-left: 16px;">{{ title }}</span>
   <span class="spacer"></span>
+  <button mat-icon-button><mat-icon>notifications</mat-icon></button>
 </mat-toolbar>
 
 <mat-drawer-container class="example-container">
   <mat-drawer mode="side" opened>
     <mat-nav-list>
+    <a mat-list-item routerLink="home">Inicio</a>
       <a mat-list-item routerLink="item/1">Movimientos</a>
       <a mat-list-item routerLink="items">Articulos</a>
       <a mat-list-item routerLink="item/2">Existencias</a>

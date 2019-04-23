@@ -2,37 +2,57 @@
 <form action="#" style="display: flex; flex-direction:column">
 
   <div class="row">
+    <div class="col-6">
 
-    <!-- ID -->
-    <mat-form-field class="col">
-      <input matInput placeholder="ID" value="{{ id }}" disabled>
-    </mat-form-field>
+      <div class="row">
+        <div class="col-2">
+          <!-- ID -->
+          <mat-form-field class="d-block">
+            <input matInput placeholder="ID" value="{{ id }}" disabled>
+          </mat-form-field>
+        </div>
+        <div class="col-10">
+          <!-- Nombre -->
+          <mat-form-field class="d-block">
+            <input name="name" [(ngModel)]='item.name' matInput placeholder="Nombre" value="{{ item.name }}">
+          </mat-form-field>
+        </div>
+      </div>
 
-    <!-- Nombre -->
-    <mat-form-field class="col">
-      <input name="name" [(ngModel)]='item.name' matInput placeholder="Nombre" value="{{ item.name }}">
-    </mat-form-field>
+      <!-- Descripcion -->
+      <mat-form-field class="d-block">
+        <input name="description" [(ngModel)]='item.description' matInput placeholder="Descripción"
+          value="{{ item.description }}">
+      </mat-form-field>
 
-    <!-- Descripcion -->
-    <mat-form-field class="col">
-      <input name="description" [(ngModel)]='item.description' matInput placeholder="Descripción" value="{{ item.description }}">
-    </mat-form-field>
-  </div>
+      <div class="row">
+        <div class="col">
 
-  <div class="row">
+          <!-- Categoria -->
+          <mat-form-field class="d-block">
+            <mat-label>Categoría</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
-    <!-- Categoria -->
-    <mat-form-field class="col">
-      <mat-label>Categoría</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <div class="col">
+          <!-- Precio -->
+          <mat-form-field class="d-block">
+            <input matInput placeholder="Precio">
+          </mat-form-field>
+        </div>
 
-    <!-- Precio -->
-    <mat-form-field class="col">
-      <input matInput placeholder="Precio">
-    </mat-form-field>
+      </div>
+
+      <div class="row">
+        <div class="col">
+            <button mat-raised-button color="primary" class="float-right">Guardar</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 </form>
