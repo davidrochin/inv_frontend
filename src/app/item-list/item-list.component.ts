@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Item } from '../item';
-import { ItemService } from '../item.service';
 import { DataSource } from '@angular/cdk/table';
+import { RestApiService } from "../shared/rest-api";
+
+import {MatPaginatorModule, MatPaginator, PageEvent} from '@angular/material/paginator';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-item-list',
@@ -10,17 +13,33 @@ import { DataSource } from '@angular/cdk/table';
 })
 export class ItemListComponent implements OnInit {
 
+  page : number = 1;
+  count : number = 0;
+
   dataSource: Item[];
+  displayedColumns: string[] = ['name', 'price', 'category'];
 
-  displayedColumns: string[] = ['id', 'name', 'price'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private itemService: ItemService) { }
+  constructor(public restApi: RestApiService) { }
 
   ngOnInit() {
-    this.itemService.getAll().subscribe(items => {
+    this.refresh();
+  }
+
+  refresh(): void {
+    this.page = this.paginator.pageIndex + 1;
+
+    // Obtener todos los items desde la API
+    this.restApi.getItems(this.page).subscribe(json => {
+      let items: Item[];
+      items = json.results;
+      this.count = json.count;
+      console.log(items);
       this.dataSource = items;
+
+      this.paginator.length = this.count;
     });
-    
   }
 
 }

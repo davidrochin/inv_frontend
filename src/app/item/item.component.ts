@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../item';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from "@angular/common";
-import { ItemService } from '../item.service';
+import { RestApiService } from "../shared/rest-api";
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-item',
@@ -12,7 +15,7 @@ import { ItemService } from '../item.service';
 
 export class ItemComponent implements OnInit {
 
-  item: Item;
+  item: Item = new Item();
 
   categories: Object = [
     {id: 1, name: 'Alimentos' },
@@ -22,12 +25,32 @@ export class ItemComponent implements OnInit {
     {id: 5, name: 'Otros' },
   ];
 
-  constructor(private route: ActivatedRoute, private location: Location, private itemService: ItemService) { }
+  constructor(private route: ActivatedRoute, private location: Location, public restApi: RestApiService, 
+    public dialogRef: MatDialogRef<ItemComponent>) { }
 
   ngOnInit() {
-    this.itemService.get(1).subscribe(item => {
+    this.restApi.getItem(1).subscribe(item => {
       this.item = item;
     });
   }
+
+  onSubmit() : void{
+    console.log(this.item);
+    this.restApi.createItem(this.item).subscribe(response => {
+      alert(response);
+      this.dialogRef.close();
+    });
+  }
+
+  onCancel() : void {
+    this.dialogRef.close();
+  }
+
+  onNoClick(): void {
+    alert("No cliiic");
+    this.dialogRef.close();
+  }
+
+  get diagnostic() { return JSON.stringify(this.item); }
 
 }

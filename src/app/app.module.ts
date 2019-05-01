@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
+
 // Angular Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCheckboxModule } from '@angular/material';
@@ -38,21 +40,27 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
+
 import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { HomeComponent } from './home/home.component';
+import { ItemsComponent } from './items/items.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemComponent,
     ItemListComponent,
-    HomeComponent
+    HomeComponent,
+    ItemsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+
+    HttpClientModule,
 
     // Angular Material
     BrowserAnimationsModule,
@@ -88,7 +96,12 @@ import { HomeComponent } from './home/home.component';
     MatSortModule,
     MatPaginatorModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ItemComponent
+  ]
 })
 export class AppModule { }

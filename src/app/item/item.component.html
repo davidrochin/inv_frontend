@@ -1,58 +1,53 @@
 <h1 class="mat-h1">Nuevo artículo</h1>
 <form action="#" style="display: flex; flex-direction:column">
 
-  <div class="row">
-    <div class="col-6">
+  <div>
+    <div class="row">
+      <div class="col-12">
 
-      <div class="row">
-        <div class="col-2">
-          <!-- ID -->
-          <mat-form-field class="d-block">
-            <input matInput placeholder="ID" value="{{ id }}" disabled>
-          </mat-form-field>
-        </div>
-        <div class="col-10">
-          <!-- Nombre -->
-          <mat-form-field class="d-block">
-            <input name="name" [(ngModel)]='item.name' matInput placeholder="Nombre" value="{{ item.name }}">
-          </mat-form-field>
-        </div>
-      </div>
-
-      <!-- Descripcion -->
-      <mat-form-field class="d-block">
-        <input name="description" [(ngModel)]='item.description' matInput placeholder="Descripción"
-          value="{{ item.description }}">
-      </mat-form-field>
-
-      <div class="row">
-        <div class="col">
-
-          <!-- Categoria -->
-          <mat-form-field class="d-block">
-            <mat-label>Categoría</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div class="col">
-          <!-- Precio -->
-          <mat-form-field class="d-block">
-            <input matInput placeholder="Precio">
-          </mat-form-field>
-        </div>
+        <!-- Nombre -->
+        <mat-form-field class="d-block">
+          <input required minlength="3" maxlength="50" name="name" [(ngModel)]='item.name' matInput placeholder="Nombre"
+            value="{{ item.name }}">
+          <mat-error>Inválido</mat-error>
+        </mat-form-field>
 
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col">
-            <button mat-raised-button color="primary" class="float-right">Guardar</button>
-        </div>
+    <!-- Descripcion -->
+    <!--<mat-form-field class="d-block">
+            <input name="description" [(ngModel)]='item.description' matInput placeholder="Descripción"
+              value="{{ item.description }}">
+          </mat-form-field>-->
+
+    <div class="row">
+      <div class="col">
+
+        <!-- Categoria -->
+        <mat-form-field class="d-block">
+          <mat-label>Categoría</mat-label>
+          <mat-select name="category_id" [(ngModel)]="item.category_id">
+            <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <!-- Precio -->
+        <mat-form-field class="d-block">
+          <input ngModel name="price" [(ngModel)]='item.price' matInput placeholder="Precio">
+        </mat-form-field>
       </div>
 
     </div>
-  </div>
 
+    <div class="row">
+      <div class="col">
+
+        <button mat-raised-button color="primary" class="float-right" (click)="onSubmit()">Guardar</button>
+        <button mat-raised-button color="secondary" class="float-right mr-2" (click)="onCancel()">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </form>
