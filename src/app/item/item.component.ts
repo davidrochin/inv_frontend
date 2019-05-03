@@ -29,15 +29,15 @@ export class ItemComponent implements OnInit {
     public dialogRef: MatDialogRef<ItemComponent>) { }
 
   ngOnInit() {
-    this.restApi.getItem(1).subscribe(item => {
+    /*this.restApi.getItem(1).subscribe(item => {
       this.item = item;
-    });
+    });*/
   }
 
   onSubmit() : void{
     console.log(this.item);
     this.restApi.createItem(this.item).subscribe(response => {
-      alert(response);
+      //alert(response);
       this.dialogRef.close();
     });
   }
@@ -49,6 +49,10 @@ export class ItemComponent implements OnInit {
   onNoClick(): void {
     alert("No cliiic");
     this.dialogRef.close();
+  }
+
+  log(o: any){
+    console.log(o);
   }
 
   get diagnostic() { return JSON.stringify(this.item); }

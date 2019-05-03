@@ -1,5 +1,5 @@
 <h1 class="mat-h1">Nuevo artículo</h1>
-<form action="#" style="display: flex; flex-direction:column">
+<form action="#" name="form" #form="ngForm" style="display: flex; flex-direction:column">
 
   <div>
     <div class="row">
@@ -7,9 +7,11 @@
 
         <!-- Nombre -->
         <mat-form-field class="d-block">
-          <input required minlength="3" maxlength="50" name="name" [(ngModel)]='item.name' matInput placeholder="Nombre"
-            value="{{ item.name }}">
-          <mat-error>Inválido</mat-error>
+          <input required minlength="3" maxlength="50" name="name" #name="ngModel" [(ngModel)]='item.name' matInput placeholder="Nombre"
+            value="{{ item.name }}" autocomplete="off">
+          <mat-error *ngIf="name.errors?.required">Requerido</mat-error>
+          <mat-error *ngIf="name.errors?.minlength">Necesita tener al menos 3 caracteres</mat-error>
+          <mat-error *ngIf="name.errors?.maxlength">Puede tener máximo 50 caracteres</mat-error>
         </mat-form-field>
 
       </div>
@@ -27,16 +29,18 @@
         <!-- Categoria -->
         <mat-form-field class="d-block">
           <mat-label>Categoría</mat-label>
-          <mat-select name="category_id" [(ngModel)]="item.category_id">
+          <mat-select required name="category_id" [(ngModel)]="item.category_id">
             <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="name.errors?.required">Requerido</mat-error>
         </mat-form-field>
       </div>
 
       <div class="col">
         <!-- Precio -->
         <mat-form-field class="d-block">
-          <input ngModel name="price" [(ngModel)]='item.price' matInput placeholder="Precio">
+          <input required type="number" ngModel name="price" [(ngModel)]='item.price' matInput placeholder="Precio">
+          <mat-error *ngIf="name.errors?.required">Requerido</mat-error>
         </mat-form-field>
       </div>
 
@@ -45,7 +49,7 @@
     <div class="row">
       <div class="col">
 
-        <button mat-raised-button color="primary" class="float-right" (click)="onSubmit()">Guardar</button>
+        <button mat-raised-button color="primary" class="float-right" (click)="onSubmit()" [disabled]="!form.valid">Guardar</button>
         <button mat-raised-button color="secondary" class="float-right mr-2" (click)="onCancel()">Cancelar</button>
       </div>
     </div>
