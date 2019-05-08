@@ -4,15 +4,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Item } from "../item";
 import { ItemListComponent } from '../item-list/item-list.component';
+import { DocumentDialogComponent } from '../document-dialog/document-dialog.component';
 
 @Component({
-  selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.sass']
+  selector: 'app-documents',
+  templateUrl: './documents.component.html',
+  styleUrls: ['./documents.component.sass']
 })
-export class ItemsComponent implements OnInit {
-
-  @ViewChild(ItemListComponent) itemList: ItemListComponent;
+export class DocumentsComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
@@ -20,16 +19,18 @@ export class ItemsComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ItemComponent, {
-      width: '350px',
+    const dialogRef = this.dialog.open(DocumentDialogComponent, {
+      width: '1000px',
       hasBackdrop: true,
+      disableClose: true,
+
       //data: {name: this.name, animal: this.animal}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
-      this.itemList.refresh();
+      //this.itemList.refresh();
     });
   }
 

@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Angular Material Components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule, MatNativeDateModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -46,6 +46,9 @@ import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { HomeComponent } from './home/home.component';
 import { ItemsComponent } from './items/items.component';
+import { DocumentsComponent } from './documents/documents.component';
+import { DocumentListComponent } from './document-list/document-list.component';
+import { DocumentDialogComponent } from './document-dialog/document-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { ItemsComponent } from './items/items.component';
     ItemComponent,
     ItemListComponent,
     HomeComponent,
-    ItemsComponent
+    ItemsComponent,
+    DocumentsComponent,
+    DocumentListComponent,
+    DocumentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +76,7 @@ import { ItemsComponent } from './items/items.component';
     MatInputModule,
     MatAutocompleteModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatFormFieldModule,
     MatRadioModule,
     MatSelectModule,
@@ -101,7 +108,8 @@ import { ItemsComponent } from './items/items.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ItemComponent
+    ItemComponent,
+    DocumentDialogComponent
   ]
 })
 export class AppModule { }
