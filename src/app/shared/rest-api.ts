@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Item } from '../item';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Detail } from '../detail';
+import { InventoryDocument } from '../inventory-document';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +38,6 @@ export class RestApiService {
   }
 
 
-  // HttpClient API get() method => Fetch employee
   getItem(id): Observable<any> {
     return this.http.get<Item>(this.apiURL + '/items/' + id)
     .pipe(
@@ -45,14 +46,35 @@ export class RestApiService {
     )
   }  
 
-  // HttpClient API post() method => Create employee
   createItem(employee): Observable<any> {
     return this.http.post<Item>(this.apiURL + '/items/', JSON.stringify(employee), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     )
-  }  
+  }
+
+  createDetail(detail): Observable<any> {
+    return this.http.post<Detail>(this.apiURL + '/details/', JSON.stringify(detail), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  createDocument(doc): Observable<any> {
+
+    let object : any = new Object();
+    object.date = this.dateToString(doc.date);
+
+    console.log(JSON.stringify(object));
+
+    return this.http.post<InventoryDocument>(this.apiURL + '/documents/', JSON.stringify(object), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 
   // HttpClient API put() method => Update employee
   updateItem(id, item): Observable<any> {
@@ -84,6 +106,10 @@ export class RestApiService {
      }
      window.alert(errorMessage);
      return throwError(errorMessage);
+  }
+
+  dateToString(date : Date): string{
+    return (date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay())
   }
 
 }

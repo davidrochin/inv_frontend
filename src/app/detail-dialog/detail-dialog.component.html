@@ -1,0 +1,26 @@
+<form #form="ngForm">
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Artículo</mat-label>
+      <mat-select name="selectedItem" [(ngModel)]="selectedItem" required>
+        <mat-option *ngFor="let item of items" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <input name="quantity" [(ngModel)]="selectedQuantity" matInput placeholder="Cantidad" value="1" type="number" min="1" required>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+      <div class="col">
+        <button mat-raised-button color="primary" class="float-right" (click)="onSave()" [disabled]="!form.valid">Guardar</button>
+      </div>
+    </div>
+
+</form>
