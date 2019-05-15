@@ -5,6 +5,7 @@ import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component'
 import { InventoryDocument } from '../inventory-document';
 import { Detail } from '../detail';
 import { RestApiService } from '../shared/rest-api';
+import { Item } from '../item';
 
 @Component({
   selector: 'app-document-dialog',
@@ -15,6 +16,8 @@ export class DocumentDialogComponent implements OnInit {
 
   inventoryDocument: InventoryDocument = new InventoryDocument();
 
+  items : Item[] = [];
+
   dataSource: Detail[];
   displayedColumns: string[] = ['item', 'quantity'];
 
@@ -22,6 +25,13 @@ export class DocumentDialogComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = this.inventoryDocument.details;
+
+    // Obtener todos los items desde la API y guardarlos en cache
+    this.restApi.getItems().subscribe(json => {
+      json.results.forEach(element => {
+        this.items[element.id] = element;
+      });
+    });
   }
 
   openDetailDialog(): void {
@@ -48,17 +58,16 @@ export class DocumentDialogComponent implements OnInit {
     // Save document
     let o = this.restApi.createDocument(this.inventoryDocument);
     o.subscribe(
-      x => console.log('Observer got a next value: ' + x),
+      x => {
+        this.inventoryDocument = x
+
+        // Save details
+        this.inventoryDocument.details.forEach(detail => {
+          detail.document_id = this.inventoryDocument.id;
+          this.restApi.createDetail(detail);
+        });
+      },
       err => console.error('Observer got an error: ' + err));
-      
-    console.log(o);
-
-    // Set document_id to details
-
-    // Save details
-    this.inventoryDocument.details.forEach(detail => {
-      this.restApi.createDetail(detail);
-    });
   }
 
 }
