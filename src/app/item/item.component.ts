@@ -6,6 +6,7 @@ import { RestApiService } from "../shared/rest-api";
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-item',
@@ -17,18 +18,13 @@ export class ItemComponent implements OnInit {
 
   item: Item = new Item();
 
-  categories: Object = [
-    {id: 1, name: 'Alimentos' },
-    {id: 2, name: 'Bebidas' },
-    {id: 3, name: 'Limpieza' },
-    {id: 4, name: 'Higiene' },
-    {id: 5, name: 'Otros' },
-  ];
+  categories = Category.categories;
 
   constructor(private route: ActivatedRoute, private location: Location, public restApi: RestApiService, 
     public dialogRef: MatDialogRef<ItemComponent>) { }
 
   ngOnInit() {
+    console.log(this.categories);
     /*this.restApi.getItem(1).subscribe(item => {
       this.item = item;
     });*/

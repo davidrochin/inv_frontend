@@ -6,6 +6,7 @@ import { InventoryDocument } from '../inventory-document';
 import { Detail } from '../detail';
 import { RestApiService } from '../shared/rest-api';
 import { Item } from '../item';
+import { App } from '../app';
 
 @Component({
   selector: 'app-document-dialog',
@@ -16,7 +17,7 @@ export class DocumentDialogComponent implements OnInit {
 
   inventoryDocument: InventoryDocument = new InventoryDocument();
 
-  items : Item[] = [];
+  items = Item.items;
 
   dataSource: Detail[];
   displayedColumns: string[] = ['item', 'quantity'];
@@ -26,12 +27,6 @@ export class DocumentDialogComponent implements OnInit {
   ngOnInit() {
     this.dataSource = this.inventoryDocument.details;
 
-    // Obtener todos los items desde la API y guardarlos en cache
-    this.restApi.getItems().subscribe(json => {
-      json.results.forEach(element => {
-        this.items[element.id] = element;
-      });
-    });
   }
 
   openDetailDialog(): void {
@@ -57,23 +52,41 @@ export class DocumentDialogComponent implements OnInit {
 
     // Save document
     let o = this.restApi.createDocument(this.inventoryDocument);
+
+    let success : boolean = true;
+
     o.subscribe(
       x => {
         //this.inventoryDocument = x
-        let document_id = x.id;
+        let document_id = x.url;
 
         // Save its details
         //console.log(this.inventoryDocument);
         this.inventoryDocument.details.forEach(detail => {
+
           detail.document_id = document_id;
+          detail.item_id = detail.item_id;
+
+          console.log("Saving detail: ");
+          console.log(detail);
+
           this.restApi.createDetail(detail).subscribe(x => {
             console.log(detail);
           }, err => {
             console.error('Observer got an error: ' + err);
+            success = false;
           });
         });
       },
-      err => console.error('Observer got an error: ' + err));
+      err => {
+        console.error('Observer got an error: ' + err)
+        success = false;
+      });
+      
+      if(success){
+        alert("Guardado con éxito");
+        this.dialogRef.close();
+      }
   }
 
 }

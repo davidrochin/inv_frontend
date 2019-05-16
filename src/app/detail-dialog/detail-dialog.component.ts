@@ -35,6 +35,7 @@ export class DetailDialogComponent implements OnInit {
   onSave(){
     let detail : Detail = new Detail();
     detail.item_id = this.selectedItem;
+
     detail.quantity_in = this.selectedQuantity;
     this.inventoryDocument.details.push(detail);
     //console.log(this.inventoryDocument);

@@ -55,7 +55,7 @@ export class RestApiService {
   }
 
   createDetail(detail): Observable<any> {
-    return this.http.post<Detail>(this.apiURL + '/details/', JSON.stringify(detail), this.httpOptions)
+    return this.http.post<Detail>(this.apiURL + '/movements/', JSON.stringify(detail), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

@@ -30,7 +30,7 @@
         <mat-form-field class="d-block">
           <mat-label>Categoría</mat-label>
           <mat-select required name="category_id" [(ngModel)]="item.category_id">
-            <mat-option *ngFor="let category of categories" [value]="category.id">{{category.name}}</mat-option>
+            <mat-option *ngFor="let item of categories | keyvalue" [value]="item.key">{{item.value.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="name.errors?.required">Requerido</mat-error>
         </mat-form-field>
