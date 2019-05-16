@@ -59,12 +59,18 @@ export class DocumentDialogComponent implements OnInit {
     let o = this.restApi.createDocument(this.inventoryDocument);
     o.subscribe(
       x => {
-        this.inventoryDocument = x
+        //this.inventoryDocument = x
+        let document_id = x.id;
 
-        // Save details
+        // Save its details
+        //console.log(this.inventoryDocument);
         this.inventoryDocument.details.forEach(detail => {
-          detail.document_id = this.inventoryDocument.id;
-          this.restApi.createDetail(detail);
+          detail.document_id = document_id;
+          this.restApi.createDetail(detail).subscribe(x => {
+            console.log(detail);
+          }, err => {
+            console.error('Observer got an error: ' + err);
+          });
         });
       },
       err => console.error('Observer got an error: ' + err));
