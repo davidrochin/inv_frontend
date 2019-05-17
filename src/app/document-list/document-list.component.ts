@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { RestApiService } from '../shared/rest-api';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-document-list',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentListComponent implements OnInit {
 
-  constructor() { }
+  page : number = 1;
+  count : number = 0;
+
+  dataSource: Document[];
+  displayedColumns: string[] = ['date', 'action'];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(public restApi: RestApiService) { }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  refresh(): void {
+    this.page = this.paginator.pageIndex + 1;
+
+    // Obtener todos los items desde la API
+    this.restApi.getDocuments(this.page).subscribe(json => {
+      let items: Document[];
+      items = json.results;
+      this.count = json.count;
+      console.log(items);
+      this.dataSource = items;
+
+      this.paginator.length = this.count;
+    });
   }
 
 }
