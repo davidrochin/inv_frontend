@@ -1,10 +1,10 @@
 export class Category {
 
-    id : number;
+    url : string;
     name : string;
 
-    constructor(id : number, name : string){
-        this.id = id;
+    constructor(url : string, name : string){
+        this.url = url;
         this.name = name;
     }
 

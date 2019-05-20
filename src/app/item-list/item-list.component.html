@@ -19,7 +19,7 @@
     <!-- Cateogry Column -->
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef> Categoría </th>
-      <td mat-cell *matCellDef="let element"> {{element.category_id}} </td>
+      <td mat-cell *matCellDef="let element"> {{categories[element.category_id].name}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

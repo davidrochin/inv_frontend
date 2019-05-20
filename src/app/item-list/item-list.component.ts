@@ -5,6 +5,7 @@ import { RestApiService } from "../shared/rest-api";
 
 import {MatPaginatorModule, MatPaginator, PageEvent} from '@angular/material/paginator';
 import { EventEmitter } from 'events';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-item-list',
@@ -15,6 +16,8 @@ export class ItemListComponent implements OnInit {
 
   page : number = 1;
   count : number = 0;
+
+  categories = Category.categories;
 
   dataSource: Item[];
   displayedColumns: string[] = ['name', 'price', 'category'];

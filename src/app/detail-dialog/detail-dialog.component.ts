@@ -5,6 +5,7 @@ import { Item } from '../item';
 import { RestApiService } from '../shared/rest-api';
 import { InventoryDocument } from '../inventory-document';
 import { Detail } from '../detail';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-detail-dialog',
@@ -15,6 +16,8 @@ export class DetailDialogComponent implements OnInit {
 
   inventoryDocument : InventoryDocument;
   items : Item[];
+
+  categories = Category.categories;
 
   selectedItem;
   selectedQuantity : number;

@@ -17,13 +17,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     
     // Inicializar las categorias
-    Category.categories[1] = new Category(1, "Alimentos");
-    Category.categories[2] = new Category(2, "Bebidas");
-    Category.categories[3] = new Category(4, "Limpieza");
-    Category.categories[4] = new Category(5, "Higiene");
-    Category.categories[5] = new Category(6, "Electrónica");
-    Category.categories[6] = new Category(7, "Ropa");
-    Category.categories[7] = new Category(8, "Otros");
+    this.restApi.getCategories().subscribe(json => {
+      json.results.forEach(element => {
+        Category.categories[element.url] = element;
+      });
+    });
 
     // Obtener todos los items desde la API y guardarlos en cache
     this.restApi.getItems().subscribe(json => {

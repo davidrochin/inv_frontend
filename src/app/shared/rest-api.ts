@@ -45,6 +45,13 @@ export class RestApiService {
     )
   }
 
+  getCategories(): Observable<any> {
+    return this.http.get<Document>(this.apiURL + '/categories')
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 
   getItem(id): Observable<any> {
     return this.http.get<Item>(this.apiURL + '/items/' + id)
