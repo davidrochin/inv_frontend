@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../shared/rest-api';
 import { MatPaginator } from '@angular/material';
+import { InventoryDocument } from '../inventory-document';
 
 @Component({
   selector: 'app-document-list',
@@ -12,8 +13,10 @@ export class DocumentListComponent implements OnInit {
   page : number = 1;
   count : number = 0;
 
-  dataSource: Document[];
-  displayedColumns: string[] = ['date', 'action'];
+  details = {};
+
+  dataSource: InventoryDocument[];
+  displayedColumns: string[] = ['date', 'indicator', 'action'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -28,7 +31,18 @@ export class DocumentListComponent implements OnInit {
 
     // Obtener todos los items desde la API
     this.restApi.getDocuments(this.page).subscribe(json => {
-      let items: Document[];
+      let items: InventoryDocument[];
+      items = json.results;
+      this.count = json.count;
+      console.log(items);
+      this.dataSource = items;
+
+      this.paginator.length = this.count;
+    });
+
+    // Obtener todos los detalles desde la API
+    this.restApi.getDocuments(this.page).subscribe(json => {
+      let items: InventoryDocument[];
       items = json.results;
       this.count = json.count;
       console.log(items);

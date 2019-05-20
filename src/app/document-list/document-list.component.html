@@ -10,6 +10,14 @@
       <td mat-cell *matCellDef="let element"> {{element.date}} </td>
     </ng-container>
 
+    <!-- Indicator Column -->
+    <ng-container matColumnDef="indicator">
+      <th mat-header-cell *matHeaderCellDef> Indicador </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="indicator-bar"></div>
+      </td>
+    </ng-container>
+
     <!-- Action Column -->
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -27,3 +35,12 @@
   <div style="flex-grow: 1"></div>
   <mat-paginator [pageSize]="10" (page)="pageEvent = refresh($event)"></mat-paginator>
 </div>
+
+<style>
+
+  .indicator-bar {
+    background: red;
+    height: 5px;
+  }
+
+</style>

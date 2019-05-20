@@ -82,7 +82,7 @@ export class RestApiService {
     let object : any = new Object();
     object.date = this.dateToString(doc.date);
 
-    console.log(JSON.stringify(object));
+    console.log(JSON.stringify(object, ["date"]));
 
     return this.http.post<InventoryDocument>(this.apiURL + '/documents/', JSON.stringify(object), this.httpOptions)
     .pipe(
