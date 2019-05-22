@@ -45,8 +45,8 @@ export class RestApiService {
     )
   }
 
-  getMovement(document_id : number): Observable<any> {
-    return this.http.get<Document>(this.apiURL + '/movements')
+  getMovements(document_id : number): Observable<any> {
+    return this.http.get<Detail>(this.apiURL + '/movements?document_id=' + document_id)
     .pipe(
       retry(1),
       catchError(this.handleError)

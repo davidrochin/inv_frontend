@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../shared/rest-api';
 import { MatPaginator } from '@angular/material';
 import { InventoryDocument } from '../inventory-document';
+import { Detail } from '../detail';
 
 @Component({
   selector: 'app-document-list',
@@ -29,27 +30,33 @@ export class DocumentListComponent implements OnInit {
   refresh(): void {
     this.page = this.paginator.pageIndex + 1;
 
-    // Obtener todos los items desde la API
     this.restApi.getDocuments(this.page).subscribe(json => {
-      let items: InventoryDocument[];
-      items = json.results;
+      let docs: InventoryDocument[];
+      docs = json.results;
       this.count = json.count;
-      console.log(items);
-      this.dataSource = items;
+      this.dataSource = docs;
+
+      // Transformar los JSON a InventoryDocument
+      for(let i = 0; i < docs.length; i++){
+        docs[i] = new InventoryDocument().copy(docs[i]);
+      }
 
       this.paginator.length = this.count;
+
+      // Get movements for each document
+      this.dataSource.forEach(doc => {
+        this.restApi.getMovements(doc.id).subscribe(json => {
+          //doc = new InventoryDocument().copy(doc);
+          let movs: Detail[];
+          movs = json.results;
+          doc.details = movs;
+          console.log("Got details for:");
+          console.log(doc);
+          doc.calculatePercentages();
+        });
+      });
     });
 
-    // Obtener todos los detalles desde la API
-    this.restApi.getDocuments(this.page).subscribe(json => {
-      let items: InventoryDocument[];
-      items = json.results;
-      this.count = json.count;
-      console.log(items);
-      this.dataSource = items;
-
-      this.paginator.length = this.count;
-    });
   }
 
 }

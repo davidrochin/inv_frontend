@@ -14,7 +14,9 @@
     <ng-container matColumnDef="indicator">
       <th mat-header-cell *matHeaderCellDef> Indicador </th>
       <td mat-cell *matCellDef="let element">
-        <div class="indicator-bar"></div>
+        <div class="indicator-bar">
+          <div *ngFor="let category of element.indicator_categories; let i = index" [attr.data-index]="i" class="indicator-bar-segment" [style.width.%]="element.indicator_category_percentages[i] * 100" [style.background]="'#' + element.indicator_categories[i].color"></div>
+        </div>
       </td>
     </ng-container>
 
@@ -39,8 +41,17 @@
 <style>
 
   .indicator-bar {
-    background: red;
+    background: lightgray;
     height: 5px;
+    width: 200px;
+    overflow: visible;
+  }
+
+  .indicator-bar-segment {
+    background: blue;
+    height: 5px;
+    width: 50%;
+    float: left;
   }
 
 </style>

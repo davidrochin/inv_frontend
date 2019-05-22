@@ -57,8 +57,7 @@ export class DocumentDialogComponent implements OnInit {
 
     o.subscribe(
       x => {
-        //this.inventoryDocument = x
-        let document_id = x.url;
+        let document_id = x.id;
 
         // Save its details
         //console.log(this.inventoryDocument);
