@@ -15,7 +15,7 @@
           </mat-option>-->
           
           <ng-container *ngFor="let item of items">
-            <mat-option *ngIf="item.category_id == kv.value.url" [value]="item.url">
+            <mat-option *ngIf="item.category_id == kv.value.id" [value]="item.id">
               {{ item.name }}
             </mat-option>
           </ng-container>

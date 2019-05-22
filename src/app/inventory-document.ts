@@ -1,7 +1,7 @@
 import { Detail } from './detail';
 
 export class InventoryDocument {
-    url: string;
+    id: number;
     date: Date = new Date();
     details: Detail[] = [];
     category_percentages : string[] = [];

@@ -45,6 +45,14 @@ export class RestApiService {
     )
   }
 
+  getMovement(document_id : number): Observable<any> {
+    return this.http.get<Document>(this.apiURL + '/movements')
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   getCategories(): Observable<any> {
     return this.http.get<Document>(this.apiURL + '/categories')
     .pipe(

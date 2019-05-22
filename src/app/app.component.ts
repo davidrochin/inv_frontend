@@ -19,14 +19,14 @@ export class AppComponent implements OnInit {
     // Inicializar las categorias
     this.restApi.getCategories().subscribe(json => {
       json.results.forEach(element => {
-        Category.categories[element.url] = element;
+        Category.categories[element.id] = element;
       });
     });
 
     // Obtener todos los items desde la API y guardarlos en cache
     this.restApi.getItems().subscribe(json => {
       json.results.forEach(element => {
-        Item.items[element.url] = element;
+        Item.items[element.id] = element;
       });
     });
 
