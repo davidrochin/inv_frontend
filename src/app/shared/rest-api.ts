@@ -77,6 +77,14 @@ export class RestApiService {
     )
   }
 
+  createCategory(category): Observable<any> {
+    return this.http.post<Item>(this.apiURL + '/categories/', JSON.stringify(category), this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   createDetail(detail): Observable<any> {
     return this.http.post<Detail>(this.apiURL + '/movements/', JSON.stringify(detail), this.httpOptions)
     .pipe(

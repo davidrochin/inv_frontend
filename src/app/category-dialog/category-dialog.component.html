@@ -1,0 +1,33 @@
+<form #form="ngForm">
+
+  <div class="row">
+    <mat-form-field class="col">
+      <input name="name" [(ngModel)]="category.name" matInput placeholder="Nombre" required>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col">
+      <mat-label>Color</mat-label>
+      <mat-select name="color" [(ngModel)]="category.color" required>
+
+        <!--<mat-select-trigger>{{selected}}</mat-select-trigger>-->
+
+        <mat-option [value]="'db3636'">Rojo</mat-option>
+        <mat-option [value]="'2f72bf'">Azul</mat-option>
+        <mat-option [value]="'46bc25'">Verde</mat-option>
+        <mat-option [value]="'d6b12c'">Amarillo</mat-option>
+        <mat-option [value]="'db46c2'">Magenta</mat-option>
+        <mat-option [value]="'bc8d54'">Café</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button mat-raised-button color="primary" class="float-right" (click)="onSave()"
+        [disabled]="!form.valid">Guardar</button>
+    </div>
+  </div>
+
+</form>

@@ -12,7 +12,11 @@ import { Item } from './item';
 export class AppComponent implements OnInit {
   title = 'Inventario Simple';
 
-  constructor(public restApi: RestApiService) { }
+  static restApi : RestApiService;
+
+  constructor(public restApi: RestApiService) {
+    AppComponent.restApi = restApi;
+  }
 
   ngOnInit(): void {
     
@@ -30,5 +34,13 @@ export class AppComponent implements OnInit {
       });
     });
 
+  }
+
+  static refreshCategories(){
+    AppComponent.restApi.getCategories().subscribe(json => {
+      json.results.forEach(element => {
+        Category.categories[element.id] = element;
+      });
+    });
   }
 }

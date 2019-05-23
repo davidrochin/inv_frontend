@@ -31,6 +31,8 @@
           <mat-label>Categoría</mat-label>
           <mat-select required name="category_id" [(ngModel)]="item.category_id">
             <mat-option *ngFor="let item of categories | keyvalue" [value]="item.key">{{item.value.name}}</mat-option>
+            <mat-divider></mat-divider>
+            <mat-option (click)="openCategoryDialog()">Nueva categoría...</mat-option>
           </mat-select>
           <mat-error *ngIf="name.errors?.required">Requerido</mat-error>
         </mat-form-field>

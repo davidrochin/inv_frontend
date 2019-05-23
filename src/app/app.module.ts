@@ -50,6 +50,7 @@ import { DocumentsComponent } from './documents/documents.component';
 import { DocumentListComponent } from './document-list/document-list.component';
 import { DocumentDialogComponent } from './document-dialog/document-dialog.component';
 import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
+import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
     DocumentsComponent,
     DocumentListComponent,
     DocumentDialogComponent,
-    DetailDialogComponent
+    DetailDialogComponent,
+    CategoryDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,7 @@ import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
     ItemComponent,
     DocumentDialogComponent,
     DetailDialogComponent,
+    CategoryDialogComponent
   ]
 })
 export class AppModule { }
