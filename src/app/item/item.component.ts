@@ -35,7 +35,9 @@ export class ItemComponent implements OnInit {
   onSubmit(): void {
     console.log(this.item);
     this.restApi.createItem(this.item).subscribe(response => {
-      //alert(response);
+      
+      AppComponent.refreshItems();
+
       this.dialogRef.close();
     });
   }

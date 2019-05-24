@@ -43,4 +43,12 @@ export class AppComponent implements OnInit {
       });
     });
   }
+
+  static refreshItems(){
+    AppComponent.restApi.getItems().subscribe(json => {
+      json.results.forEach(element => {
+        Item.items[element.id] = element;
+      });
+    });
+  }
 }
