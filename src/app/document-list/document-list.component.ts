@@ -56,7 +56,14 @@ export class DocumentListComponent implements OnInit {
         });
       });
     });
+  }
 
+  openDocument(id : number) {
+    this.restApi.getDocument(id).subscribe(resp => {
+
+    }, err => {
+      alert(err);
+    });
   }
 
 }

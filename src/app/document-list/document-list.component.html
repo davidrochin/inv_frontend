@@ -24,7 +24,7 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" class="float-right">
+        <button mat-icon-button color="primary" class="float-right" (click)="openDocument(element.id)">
           <mat-icon aria-label="Example icon-button with a heart icon">open_in_new</mat-icon>
         </button>
       </td>

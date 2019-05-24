@@ -67,7 +67,15 @@ export class RestApiService {
       retry(1),
       catchError(this.handleError)
     )
-  }  
+  }
+
+  getDocument(id): Observable<any> {
+    return this.http.get<InventoryDocument>(this.apiURL + '/documents/' + id)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
 
   createItem(employee): Observable<any> {
     return this.http.post<Item>(this.apiURL + '/items/', JSON.stringify(employee), this.httpOptions)

@@ -26,7 +26,7 @@ export class DocumentsComponent implements OnInit {
       width: '1000px',
       hasBackdrop: true,
       disableClose: true,
-
+      //data: {}
       //data: {name: this.name, animal: this.animal}
     });
 
