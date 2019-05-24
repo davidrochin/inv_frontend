@@ -41,7 +41,7 @@
       <div class="col">
         <!-- Precio -->
         <mat-form-field class="d-block">
-          <input required type="number" ngModel name="price" [(ngModel)]='item.price' matInput placeholder="Precio">
+          <input required type="number" ngModel name="price" [(ngModel)]='item.price' matInput placeholder="Precio" min="1">
           <mat-error *ngIf="name.errors?.required">Requerido</mat-error>
         </mat-form-field>
       </div>

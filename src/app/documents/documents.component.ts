@@ -5,6 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Item } from "../item";
 import { ItemListComponent } from '../item-list/item-list.component';
 import { DocumentDialogComponent } from '../document-dialog/document-dialog.component';
+import { DocumentListComponent } from '../document-list/document-list.component';
 
 @Component({
   selector: 'app-documents',
@@ -12,6 +13,8 @@ import { DocumentDialogComponent } from '../document-dialog/document-dialog.comp
   styleUrls: ['./documents.component.sass']
 })
 export class DocumentsComponent implements OnInit {
+
+  @ViewChild(DocumentListComponent) documentList: DocumentListComponent;
 
   constructor(public dialog: MatDialog) { }
 
@@ -29,6 +32,9 @@ export class DocumentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+
+      this.documentList.refresh();
+
       //this.animal = result;
       //this.itemList.refresh();
     });
