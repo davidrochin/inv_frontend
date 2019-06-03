@@ -44,7 +44,7 @@
   <div class="row mt-4">
     <div class="col">
       <button mat-raised-button color="primary" class="float-right" (click)="onSave()" [disabled]="!form.valid">Guardar</button>
-      <button mat-raised-button color="secondary" class="float-right mr-2" mat-dialog-close>Cancelar</button>
+      <button mat-raised-button color="secondary" class="float-right mr-2" mat-dialog-close (click)="debugDate()">Cancelar</button>
     </div>
   </div>
 </form>

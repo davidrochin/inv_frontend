@@ -30,7 +30,7 @@ export class RestApiService {
 
   // HttpClient API get() method => Fetch employees list
   getItems(page? : Number): Observable<any> {
-    return this.http.get<Item>(this.apiURL + '/items?' + (page ? "page=" + page : ""))
+    return this.http.get<Item>(this.apiURL + (page ? "" : "/all") + '/items?' + (page ? "page=" + page : ""))
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -102,13 +102,8 @@ export class RestApiService {
   }
 
   createDocument(doc): Observable<any> {
-
-    let object : any = new Object();
-    object.date = this.dateToString(doc.date);
-
-    console.log(JSON.stringify(object, ["date"]));
-
-    return this.http.post<InventoryDocument>(this.apiURL + '/documents/', JSON.stringify(object), this.httpOptions)
+    doc.date = doc.date.getFullYear() + "-" + (doc.date.getMonth() + 1) + "-" + doc.date.getDate()
+    return this.http.post<InventoryDocument>(this.apiURL + '/documents/', JSON.stringify(doc, ["date"]), this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)

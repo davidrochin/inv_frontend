@@ -1,0 +1,15 @@
+<form #form="ngForm" style="height: 600px;">
+
+  <div class="row">
+    <mat-form-field class="col">
+      <input name="query" matInput placeholder="Búsqueda" [(ngModel)]="query" (input)="onInput()">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-action-list class="col">
+      <button *ngFor="let kv of filteredItems | keyvalue" mat-list-item (click)="onSelect(kv.value)">{{ kv.value.name }}</button>
+    </mat-action-list>
+  </div>
+
+</form>
