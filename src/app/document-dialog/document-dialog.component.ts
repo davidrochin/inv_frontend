@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { Component, OnInit, Inject, Optional } from '@angular/core';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { ItemComponent } from '../item/item.component';
 import { DetailDialogComponent } from '../detail-dialog/detail-dialog.component';
 import { InventoryDocument } from '../inventory-document';
@@ -17,16 +17,26 @@ export class DocumentDialogComponent implements OnInit {
 
   inventoryDocument: InventoryDocument = new InventoryDocument();
 
+  editable : boolean = true;
+
   items = Item.items;
 
   dataSource: Detail[];
   displayedColumns: string[] = ['item', 'quantity'];
 
-  constructor(public dialogRef: MatDialogRef<ItemComponent>, public dialog: MatDialog, public restApi: RestApiService) { }
+  constructor(public dialogRef: MatDialogRef<ItemComponent>, public dialog: MatDialog, public restApi: RestApiService, @Optional() @Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
     this.dataSource = this.inventoryDocument.details;
 
+    // If we are loading an existing document...
+    if(this.data != null){
+      console.log("Abriendo el siguiente documento en el dialogo:");
+      console.log(this.data.document);
+      this.inventoryDocument = this.data.document;
+      this.editable = false;
+    }
+    
   }
 
   openDetailDialog(): void {

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestApiService } from '../shared/rest-api';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator, MatDialog } from '@angular/material';
 import { InventoryDocument } from '../inventory-document';
 import { Detail } from '../detail';
+import { DocumentDialogComponent } from '../document-dialog/document-dialog.component';
 
 @Component({
   selector: 'app-document-list',
@@ -21,7 +22,7 @@ export class DocumentListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public restApi: RestApiService) { }
+  constructor(public restApi: RestApiService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.refresh();
@@ -60,7 +61,14 @@ export class DocumentListComponent implements OnInit {
 
   openDocument(id : number) {
     this.restApi.getDocument(id).subscribe(resp => {
-
+      const dialogRef = this.dialog.open(DocumentDialogComponent, {
+        width: '1000px',
+        hasBackdrop: true,
+        disableClose: true,
+        data: {document: resp}
+        //data: {name: this.name, animal: this.animal}
+      });
+      
     }, err => {
       alert(err);
     });

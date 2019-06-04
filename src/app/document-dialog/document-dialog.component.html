@@ -10,7 +10,9 @@
       </mat-form-field>
     </div>
     <div class="col-auto">
-      <button mat-mini-fab color="primary" (click)="openDetailDialog()">
+
+      <!-- Botón para agregar un detalle nuevo -->
+      <button *ngIf="editable" mat-mini-fab color="primary" (click)="openDetailDialog()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -43,7 +45,7 @@
 
   <div class="row mt-4">
     <div class="col">
-      <button mat-raised-button color="primary" class="float-right" (click)="onSave()" [disabled]="!form.valid">Guardar</button>
+      <button *ngIf="editable" mat-raised-button color="primary" class="float-right" (click)="onSave()" [disabled]="!form.valid">Guardar</button>
       <button mat-raised-button color="secondary" class="float-right mr-2" mat-dialog-close>Cancelar</button>
     </div>
   </div>
