@@ -98,4 +98,9 @@ export class DocumentDialogComponent implements OnInit {
       }
   }
 
+  debugDate() {
+    console.log("Debugging date");
+    console.log(this.inventoryDocument.date);
+  }
+
 }

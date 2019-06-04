@@ -20,12 +20,12 @@ export class InventoryDocument {
         let sums = {};
         
         this.details.forEach(det => {
-            totalQuantity += Number(det.quantity_in);
+            totalQuantity += Math.abs(Number(det.quantity_in));
             sums[Item.items[det.item_id].category_id] = 0;
         });
         
         this.details.forEach(det => {
-            sums[Item.items[det.item_id].category_id] = Number(sums[Item.items[det.item_id].category_id]) + Number(det.quantity_in);
+            sums[Item.items[det.item_id].category_id] = Number(sums[Item.items[det.item_id].category_id]) + Math.abs(Number(det.quantity_in));
         });
 
         this.indicator_categories = Array(Object.keys(sums).length);

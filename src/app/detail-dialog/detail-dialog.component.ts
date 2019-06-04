@@ -1,11 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { ItemComponent } from '../item/item.component';
 import { Item } from '../item';
 import { RestApiService } from '../shared/rest-api';
 import { InventoryDocument } from '../inventory-document';
 import { Detail } from '../detail';
 import { Category } from '../category';
+import { ItemSearchDialogComponent } from '../item-search-dialog/item-search-dialog.component';
 
 @Component({
   selector: 'app-detail-dialog',
@@ -22,7 +23,7 @@ export class DetailDialogComponent implements OnInit {
   selectedItem;
   selectedQuantity : number;
 
-  constructor(public dialogRef: MatDialogRef<ItemComponent>, public restApi: RestApiService, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(public dialogRef: MatDialogRef<DetailDialogComponent>, public dialog: MatDialog, public restApi: RestApiService, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
 
@@ -43,6 +44,24 @@ export class DetailDialogComponent implements OnInit {
     this.inventoryDocument.details.push(detail);
     //console.log(this.inventoryDocument);
     this.dialogRef.close();
+  }
+
+  openItemSearch() {
+
+    console.log(this.selectedItem);
+
+    const dialogRef = this.dialog.open(ItemSearchDialogComponent, {
+      width: '300px',
+      hasBackdrop: true,
+      disableClose: false,
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result != null){
+        this.selectedItem = result.id;
+      }
+    });
   }
 
 }

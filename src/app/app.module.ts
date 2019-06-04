@@ -51,6 +51,7 @@ import { DocumentListComponent } from './document-list/document-list.component';
 import { DocumentDialogComponent } from './document-dialog/document-dialog.component';
 import { DetailDialogComponent } from './detail-dialog/detail-dialog.component';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
+import { ItemSearchDialogComponent } from './item-search-dialog/item-search-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { CategoryDialogComponent } from './category-dialog/category-dialog.compo
     DocumentListComponent,
     DocumentDialogComponent,
     DetailDialogComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    ItemSearchDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +117,8 @@ import { CategoryDialogComponent } from './category-dialog/category-dialog.compo
     ItemComponent,
     DocumentDialogComponent,
     DetailDialogComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    ItemSearchDialogComponent
   ]
 })
 export class AppModule { }
